@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Camera.h"
+#include "KeyboardHandler.h"
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -29,14 +30,9 @@ void drawSnowMan() {
 
 void renderScene(void) {
 
-	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glLoadIdentity();
-
 	cam.look();
-	
-	
 
 	glPushMatrix();
 	glColor3f(0.9f, 0.f, 0.f);
@@ -85,45 +81,12 @@ void renderScene(void) {
 }
 
 
-void pressKey(int key, int xx, int yy) {
-	switch (key) {
-		case GLUT_KEY_LEFT : cam.deltaAzimuth = 0.01f; break;
-		case GLUT_KEY_RIGHT : cam.deltaAzimuth = -0.01f; break;
-		case GLUT_KEY_DOWN : cam.deltaAltitude = 0.01f; break;
-		case GLUT_KEY_UP : cam.deltaAltitude = -0.01f; break;
-	}
-}
-
-void releaseKey(int key, int x, int y) {
-	switch (key) {
-		case GLUT_KEY_LEFT :
-		case GLUT_KEY_RIGHT : 
-		case GLUT_KEY_UP :
-		case GLUT_KEY_DOWN :cam.deltaAzimuth = 0.0f; cam.deltaAltitude=0.0f;break;
-	}
-}
-
-void pressKeyNormal(unsigned char key, int xx, int yy) {
-	switch (key) {
-		case 'w': cam.deltaMoveX = 1.5f; break;
-		case 's': cam.deltaMoveX = -1.5f; break;
-		case 'a': cam.deltaMoveY = -1.5f; break;
-		case 'd': cam.deltaMoveY = 1.5f; break;
-	}
-}
-
-void releaseKeyNormal(unsigned char key, int x, int y) {
-	switch (key) {
-		case 'w' : 
-		case 's' : 
-		case 'a' : 
-		case 'd' : cam.deltaMoveX = 0.f; cam.deltaMoveY = 0.f;break;
-	}
-}
-
 int main(int argc, char **argv) {
-
 	
+	KeyboardHandler& keyboardHandler = KeyboardHandler::getInstance();
+    keyboardHandler.setCamera(&cam);
+
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100,100);
@@ -134,12 +97,20 @@ int main(int argc, char **argv) {
 	glutReshapeFunc(changeSize);
 	glutIdleFunc(renderScene);
 
-	glutKeyboardFunc(pressKeyNormal);
-	glutSpecialFunc(pressKey);
+	glutKeyboardFunc([](unsigned char key, int xx, int yy) {
+        KeyboardHandler::getInstance().pressKeyNormal(key, xx, yy);
+    });
+    glutSpecialFunc([](int key, int xx, int yy) {
+        KeyboardHandler::getInstance().pressKey(key, xx, yy);
+    });
+    glutKeyboardUpFunc([](unsigned char key, int xx, int yy) {
+        KeyboardHandler::getInstance().releaseKeyNormal(key, xx, yy);
+    });
+    glutSpecialUpFunc([](int key, int xx, int yy) {
+        KeyboardHandler::getInstance().releaseKey(key, xx, yy);
+    });
 
-	glutIgnoreKeyRepeat(1);
-	glutSpecialUpFunc(releaseKey);
-	glutKeyboardUpFunc(releaseKeyNormal);
+    glutIgnoreKeyRepeat(1);
 
 	glEnable(GL_DEPTH_TEST);
 

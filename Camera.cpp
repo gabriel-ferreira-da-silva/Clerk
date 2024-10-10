@@ -55,7 +55,7 @@ void Camera::look() {
     
     gluLookAt(
         position.x, position.y, position.z,
-        direction.x,direction.y,direction.z,
+        direction.x, direction.y, direction.z,
         up.x, up.y, up.z
     );
 }
