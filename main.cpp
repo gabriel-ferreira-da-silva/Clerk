@@ -62,6 +62,24 @@ void renderScene(void) {
 	drawSnowMan();
 	glPopMatrix();
 
+	glPushMatrix();
+	glColor3f(0.3f, 0.3f, 0.9f);
+	glTranslatef( 0., 10.0, 10.0);
+	drawSnowMan();
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glTranslatef( 10., 10.0, 10.0);
+	drawSnowMan();
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0.4f, 0.1f, 0.1f);
+	glTranslatef( 10., .0, 10.0);
+	drawSnowMan();
+	glPopMatrix();
+
 
 	glutSwapBuffers();
 }
@@ -69,19 +87,37 @@ void renderScene(void) {
 
 void pressKey(int key, int xx, int yy) {
 	switch (key) {
-		case GLUT_KEY_LEFT : cam.deltaAngle = -0.01f; break;
-		case GLUT_KEY_RIGHT : cam.deltaAngle = 0.01f; break;
-		case GLUT_KEY_UP : cam.deltaMove = 0.5f; break;
-		case GLUT_KEY_DOWN : cam.deltaMove = -0.5f; break;
+		case GLUT_KEY_LEFT : cam.deltaAzimuth = 0.01f; break;
+		case GLUT_KEY_RIGHT : cam.deltaAzimuth = -0.01f; break;
+		case GLUT_KEY_DOWN : cam.deltaAltitude = 0.01f; break;
+		case GLUT_KEY_UP : cam.deltaAltitude = -0.01f; break;
 	}
 }
 
 void releaseKey(int key, int x, int y) {
 	switch (key) {
 		case GLUT_KEY_LEFT :
-		case GLUT_KEY_RIGHT : cam.deltaAngle = 0.0f;break;
+		case GLUT_KEY_RIGHT : 
 		case GLUT_KEY_UP :
-		case GLUT_KEY_DOWN : cam.deltaMove = 0;break;
+		case GLUT_KEY_DOWN :cam.deltaAzimuth = 0.0f; cam.deltaAltitude=0.0f;break;
+	}
+}
+
+void pressKeyNormal(unsigned char key, int xx, int yy) {
+	switch (key) {
+		case 'w': cam.deltaMoveX = 1.5f; break;
+		case 's': cam.deltaMoveX = -1.5f; break;
+		case 'a': cam.deltaMoveY = -1.5f; break;
+		case 'd': cam.deltaMoveY = 1.5f; break;
+	}
+}
+
+void releaseKeyNormal(unsigned char key, int x, int y) {
+	switch (key) {
+		case 'w' : 
+		case 's' : 
+		case 'a' : 
+		case 'd' : cam.deltaMoveX = 0.f; cam.deltaMoveY = 0.f;break;
 	}
 }
 
@@ -98,10 +134,12 @@ int main(int argc, char **argv) {
 	glutReshapeFunc(changeSize);
 	glutIdleFunc(renderScene);
 
+	glutKeyboardFunc(pressKeyNormal);
 	glutSpecialFunc(pressKey);
 
 	glutIgnoreKeyRepeat(1);
 	glutSpecialUpFunc(releaseKey);
+	glutKeyboardUpFunc(releaseKeyNormal);
 
 	glEnable(GL_DEPTH_TEST);
 
