@@ -13,7 +13,7 @@ void Scene::drawSnowMan() {
 	glutSolidSphere(0.75f,20,20);
 }
 
-void changeSize(int w, int h) {
+void Scene::changeSize(int w, int h) {
 
 	if (h == 0)
 		h = 1;
