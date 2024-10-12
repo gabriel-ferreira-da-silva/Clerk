@@ -16,6 +16,7 @@ public:
     void releaseKey(int key, int xx, int yy);
     void pressKeyNormal(unsigned char key, int xx, int yy);
     void releaseKeyNormal(unsigned char key, int xx, int yy);
+    void registerCallbacks();
 
 private:
     Camera* cam;

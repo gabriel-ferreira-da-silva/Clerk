@@ -43,3 +43,18 @@ void KeyboardHandler::releaseKey(int key, int x, int y) {
 		case GLUT_KEY_DOWN :cam->deltaAzimuth = 0.0f; cam->deltaAltitude=0.0f;break;
 	}
 }
+
+void KeyboardHandler::registerCallbacks(){
+	glutKeyboardFunc([](unsigned char key, int xx, int yy) {
+        KeyboardHandler::getInstance().pressKeyNormal(key, xx, yy);
+    });
+    glutSpecialFunc([](int key, int xx, int yy) {
+        KeyboardHandler::getInstance().pressKey(key, xx, yy);
+    });
+    glutKeyboardUpFunc([](unsigned char key, int xx, int yy) {
+        KeyboardHandler::getInstance().releaseKeyNormal(key, xx, yy);
+    });
+    glutSpecialUpFunc([](int key, int xx, int yy) {
+        KeyboardHandler::getInstance().releaseKey(key, xx, yy);
+    });
+}

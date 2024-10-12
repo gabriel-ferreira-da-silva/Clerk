@@ -97,18 +97,7 @@ int main(int argc, char **argv) {
 	glutReshapeFunc(changeSize);
 	glutIdleFunc(renderScene);
 
-	glutKeyboardFunc([](unsigned char key, int xx, int yy) {
-        KeyboardHandler::getInstance().pressKeyNormal(key, xx, yy);
-    });
-    glutSpecialFunc([](int key, int xx, int yy) {
-        KeyboardHandler::getInstance().pressKey(key, xx, yy);
-    });
-    glutKeyboardUpFunc([](unsigned char key, int xx, int yy) {
-        KeyboardHandler::getInstance().releaseKeyNormal(key, xx, yy);
-    });
-    glutSpecialUpFunc([](int key, int xx, int yy) {
-        KeyboardHandler::getInstance().releaseKey(key, xx, yy);
-    });
+	keyboardHandler.registerCallbacks();
 
     glutIgnoreKeyRepeat(1);
 
