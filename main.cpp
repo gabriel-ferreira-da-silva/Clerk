@@ -28,8 +28,6 @@ int main(int argc, char **argv) {
 	
 	scene.init();
 
-	scene.keyboardHandler.registerCallbacks();
-
     glutIgnoreKeyRepeat(1);
 
 	glEnable(GL_DEPTH_TEST);

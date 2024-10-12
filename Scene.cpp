@@ -5,6 +5,17 @@
 #include <GL/glut.h>
 
 
+
+static Scene* sceneInstance = nullptr;
+
+void changeSizeCallback(int w, int h) {
+    sceneInstance->changeSize(w, h);
+}
+
+void renderCallback() {
+    sceneInstance->renderScene();
+}
+
 Scene::Scene(){
 	keyboardHandler.setCamera(&cam);
 }
@@ -79,18 +90,9 @@ void Scene::renderScene(void) {
 	glutSwapBuffers();
 }
 
-static Scene* sceneInstance = nullptr;
-
-void changeSizeCallback(int w, int h) {
-    sceneInstance->changeSize(w, h);
-}
-
-void renderCallback() {
-    sceneInstance->renderScene();
-}
 
 void Scene::init(){
-    sceneInstance = this;  // Set the static pointer to this instance
+    sceneInstance = this; 
 
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(100,100);
@@ -100,4 +102,6 @@ void Scene::init(){
     glutDisplayFunc(renderCallback);
     glutReshapeFunc(changeSizeCallback);
     glutIdleFunc(renderCallback);
+
+	keyboardHandler.registerCallbacks();
 }
