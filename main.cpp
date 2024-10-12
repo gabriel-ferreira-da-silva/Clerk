@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Object.h"
+#include "Particle.h"
 #include "KeyboardHandler.h"
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -27,6 +28,9 @@ int main(int argc, char **argv) {
 	glutCreateWindow("Clerk");
 
 	Sphere* sphere = new Sphere();  // Create a Sphere object
+	Particle *pa = new Particle();
+	Particle *pb = new Particle();
+	
 	(&scene)->pushObject(sphere);
 	scene.pushObject(sphere);
 	scene.init();
