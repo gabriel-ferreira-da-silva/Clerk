@@ -6,5 +6,5 @@
 
 
 Scene::Scene(){
-
+	keyboardHandler.setCamera(&cam);
 }

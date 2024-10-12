@@ -4,8 +4,10 @@
 #include "KeyboardHandler.h"
 
 class Scene {
-public:
-    Scene();
+    public:
+        Scene();
+        Camera cam;
+        KeyboardHandler& keyboardHandler = KeyboardHandler::getInstance();
 };
 
 #endif 

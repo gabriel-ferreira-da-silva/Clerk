@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
+#include "Scene.h"
 #include "Camera.h"
 #include "KeyboardHandler.h"
 #ifdef __APPLE__
@@ -79,6 +80,8 @@ void renderScene(void) {
 
 	glutSwapBuffers();
 }
+
+Scene scene;
 
 
 int main(int argc, char **argv) {
