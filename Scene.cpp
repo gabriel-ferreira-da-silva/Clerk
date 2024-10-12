@@ -1,8 +1,13 @@
 #include "KeyboardHandler.h"
 #include "Camera.h"
 #include "Scene.h"
+#include "Object.h"
+
 #include <glm/glm.hpp>
 #include <GL/glut.h>
+#include <vector>
+#include <memory>
+
 
 
 
@@ -20,8 +25,22 @@ Scene::Scene(){
 	keyboardHandler.setCamera(&cam);
 }
 
+void Scene::pushObject(Object *obj){
+    objects.push_back(std::unique_ptr<Object>(obj));  
+}
+
+void Scene::renderObjects(){
+	for (const auto& obj : objects) {
+        obj->draw(); 
+    }
+}
+
 void Scene::drawSnowMan() {
+	glPushMatrix();
+	glColor3f(0.9f, 0.f, 0.f);
+	glTranslatef( 0., 0., 10.0);
 	glutSolidSphere(0.75f,20,20);
+	glPopMatrix();
 }
 
 void Scene::changeSize(int w, int h) {
@@ -43,50 +62,8 @@ void Scene::renderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	cam.look();
-
-	glPushMatrix();
-	glColor3f(0.9f, 0.f, 0.f);
-	glTranslatef( 0., 0., 10.0);
 	drawSnowMan();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.f, 0.9f, 0.f);
-	glTranslatef( 10., 0.0, 0.0);
-	drawSnowMan();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.0f, 0.0f, 0.9f);
-	glTranslatef( 0., 10.0, 0.0);
-	drawSnowMan();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.0f, 0.0f, 0.9f);
-	glTranslatef( 0., -20.0, 0.0);
-	drawSnowMan();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.3f, 0.3f, 0.9f);
-	glTranslatef( 0., 10.0, 10.0);
-	drawSnowMan();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.5f, 0.5f, 0.5f);
-	glTranslatef( 10., 10.0, 10.0);
-	drawSnowMan();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.4f, 0.1f, 0.1f);
-	glTranslatef( 10., .0, 10.0);
-	drawSnowMan();
-	glPopMatrix();
-
-
+	renderObjects();
 	glutSwapBuffers();
 }
 

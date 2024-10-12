@@ -2,6 +2,7 @@
 #include <math.h>
 #include "Scene.h"
 #include "Camera.h"
+#include "Object.h"
 #include "KeyboardHandler.h"
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -13,7 +14,7 @@
 Camera cam;
 
 Scene scene;
-
+Sphere sphere;
 
 int main(int argc, char **argv) {
 	
@@ -25,7 +26,9 @@ int main(int argc, char **argv) {
 	glutInitWindowSize(1200,1000);
 	glutCreateWindow("Clerk");
 
-	
+	Sphere* sphere = new Sphere();  // Create a Sphere object
+	(&scene)->pushObject(sphere);
+	scene.pushObject(sphere);
 	scene.init();
 
     glutIgnoreKeyRepeat(1);
@@ -33,6 +36,5 @@ int main(int argc, char **argv) {
 	glEnable(GL_DEPTH_TEST);
 
 	glutMainLoop();
-
 	return 1;
 }
