@@ -8,6 +8,10 @@ class Scene {
         Scene();
         Camera cam;
         KeyboardHandler& keyboardHandler = KeyboardHandler::getInstance();
+        void renderScene();
+        void drawSnowMan();
+        void changeSize(int w, int h);
+        void init();
 };
 
 #endif 
