@@ -3,8 +3,7 @@
 #include "Object.h"
 #include "Camera.h"
 #include "KeyboardHandler.h"
-
-float electrostatic_constant = 0.0001f;
+#include <memory>
 
 class Particle : public Object{
     public:
@@ -16,8 +15,8 @@ class Particle : public Object{
         glm::vec3 resultant_force;
         Particle();
         void draw() const override;
-        void interact(Object *obj);
-        
+        void update() override;
+        void interact(const std::shared_ptr<Object>& obj)  override;
         void calc_position();
         void calc_velocity();
         void calc_acceleration();

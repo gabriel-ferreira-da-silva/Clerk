@@ -62,9 +62,28 @@ void Scene::renderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	cam.look();
-	drawSnowMan();
+	
+	objectsInteration();
+	objectsUpdate();
+
 	renderObjects();
 	glutSwapBuffers();
+}
+
+void Scene::objectsInteration(){
+	for (const auto& obj1 : objects) {
+		for (const auto& obj2 : objects) {
+			if(obj1 != obj2){
+				obj1->interact(obj2);
+			}
+		}
+    }
+}
+
+void Scene::objectsUpdate(){
+	for (const auto& obj1 : objects) {
+		obj1->update();
+    }
 }
 
 

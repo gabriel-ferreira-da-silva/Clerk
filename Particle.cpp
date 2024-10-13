@@ -4,6 +4,10 @@
 #include "KeyboardHandler.h"
 #include <cmath>    
 
+
+float electrostatic_constant = 0.0001f;
+
+
 Particle::Particle(){
     mass = 1.;
     electric_charge = 1.;
@@ -22,9 +26,10 @@ void Particle::draw() const{
 }
 
 
-void Particle::interact(Object* obj) {
+void Particle::interact(const std::shared_ptr<Object>& obj)  {
     
-    Particle* other = dynamic_cast<Particle*>(obj);
+    Particle* other = dynamic_cast<Particle*>(obj.get());
+    
     if (other) {
     
         glm::vec3 displacement = other->position - this->position;
@@ -53,4 +58,10 @@ void Particle::calc_velocity(){
 
 void Particle::calc_position(){
     this->position += this->velocity;
+}
+
+void Particle::update(){
+    this->calc_acceleration();
+    this->calc_velocity();
+    this->calc_position();
 }
