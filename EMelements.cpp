@@ -1,4 +1,4 @@
-#include "Particle.h"
+#include "EMelements.h"
 #include "Object.h"
 #include "Camera.h"
 #include "KeyboardHandler.h"
@@ -69,8 +69,13 @@ void Particle::update(){
  void Current::draw()const {
     glPushMatrix();
     glBegin( GL_LINES);
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(10.0f, 10.0f, 10.0f);
+        for(int i=0; i < points.size() ;i++ ){
+            glVertex3f(points[i].x,points[i].y,points[i].z);
+        }
     glEnd();
     glPopMatrix();
+ }
+
+ void Current::addPoint(glm::vec3 point){
+    this->points.push_back(point);
  }

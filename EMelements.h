@@ -1,8 +1,9 @@
-#ifndef PARTICLE_H
-#define PARTICLE_H
+#ifndef EMELEMENTS_H
+#define EMELEMENTS_H
 #include "Object.h"
 #include "Camera.h"
 #include "KeyboardHandler.h"
+#include <vector>
 #include <memory>
 
 class Particle : public Object{
@@ -23,9 +24,16 @@ class Particle : public Object{
 
 };
 
-class Current : public Particle{
+class Current : public Object{
     public:
+        float magnitude;
+        std::vector<glm::vec3> points;
+        
+        Current();
         void draw() const override;
+        void update() override;
+        void interact(const std::shared_ptr<Object>& obj)  override;
+        void addPoint(glm::vec3 point);
 
 };
 

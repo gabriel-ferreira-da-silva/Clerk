@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Object.h"
-#include "Particle.h"
+#include "EMelements.h"
 #include "KeyboardHandler.h"
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -20,7 +20,7 @@ Particle *pa = new Particle();
 Particle *pb = new Particle();
 Particle *pc = new Particle();
 Particle *pd = new Particle();
-Particle *ca = new Current();
+Current *ca = new Current();
 
 int main(int argc, char **argv) {
 	
@@ -34,6 +34,10 @@ int main(int argc, char **argv) {
 	pb->velocity = glm::vec3(.010f,-.013f,.010f);
 	pc->velocity = glm::vec3(.010f,-.013f,.010f);
 	pd->velocity = glm::vec3(.010f,-.013f,.010f);
+
+	ca->addPoint(glm::vec3( 10.f, 3.f, 10.f));
+	ca->addPoint(glm::vec3( 11.f, 5.f, 15.f));
+	ca->addPoint(glm::vec3( 20.f, 22.f, 15.f));
 
 	scene.pushObject(pa);
 	scene.pushObject(pb);
