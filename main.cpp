@@ -34,10 +34,14 @@ int main(int argc, char **argv) {
 	pb->velocity = glm::vec3(.010f,-.013f,.010f);
 	pc->velocity = glm::vec3(.010f,-.013f,.010f);
 	pd->velocity = glm::vec3(.010f,-.013f,.010f);
-
-	ca->addPoint(glm::vec3( 10.f, 3.f, 10.f));
+	
+	ca->addPoint(glm::vec3( 0.f, 0.f, 0.f));
 	ca->addPoint(glm::vec3( 11.f, 5.f, 15.f));
 	ca->addPoint(glm::vec3( 20.f, 22.f, 15.f));
+	
+	ca->points.push_back(glm::vec3( 0.f, 0.f, 0.f));
+	ca->points.push_back(glm::vec3( 11.f, 5.f, 15.f));
+	ca->points.push_back(glm::vec3( 20.f, 22.f, 15.f));
 
 	scene.pushObject(pa);
 	scene.pushObject(pb);

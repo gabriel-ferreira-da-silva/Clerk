@@ -66,16 +66,32 @@ void Particle::update(){
     this->calc_position();
 }
 
- void Current::draw()const {
+ void Current::draw() const {
     glPushMatrix();
+    glPointSize(10.f);
     glBegin( GL_LINES);
-        for(int i=0; i < points.size() ;i++ ){
+        for(int i=0; i < points.size()-1 ;i++ ){
             glVertex3f(points[i].x,points[i].y,points[i].z);
+            glVertex3f(points[i+1].x,points[i+1].y,points[i+1].z);
         }
+        
     glEnd();
     glPopMatrix();
  }
 
  void Current::addPoint(glm::vec3 point){
-    this->points.push_back(point);
+    points.push_back(point);
+ }
+
+
+Current::Current(){
+
+}
+ void Current::update(){
+    
+ }
+
+
+ void Current::interact(const std::shared_ptr<Object>& obj){
+    
  }
