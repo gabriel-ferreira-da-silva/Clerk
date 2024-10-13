@@ -23,4 +23,10 @@ class Particle : public Object{
 
 };
 
+class Current : public Particle{
+    public:
+        void draw() const override;
+
+};
+
 #endif 

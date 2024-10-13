@@ -16,36 +16,35 @@ Camera cam;
 
 Scene scene;
 
+Particle *pa = new Particle();
+Particle *pb = new Particle();
+Particle *pc = new Particle();
+Particle *pd = new Particle();
+Particle *ca = new Current();
+
 int main(int argc, char **argv) {
 	
-
-
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(100,100);
-	glutInitWindowSize(1200,1000);
-	glutCreateWindow("Clerk");
-
-
-	Particle *pa = new Particle();
-	Particle *pb = new Particle();
-	Particle *pc = new Particle();
-	Particle *pd = new Particle();
 
 	pa->position = glm::vec3(10.f,13.f,10.f);
 	pb->position = glm::vec3(10.f,20.f,0);
 	pc->position = glm::vec3(15.f,25.f,15.f);
 	pd->position = glm::vec3(25.f,25.f,15.f);
-	
+
 	pa->velocity = glm::vec3(.010f,-.013f,.010f);
 	pb->velocity = glm::vec3(.010f,-.013f,.010f);
 	pc->velocity = glm::vec3(.010f,-.013f,.010f);
 	pd->velocity = glm::vec3(.010f,-.013f,.010f);
-	
+
 	scene.pushObject(pa);
 	scene.pushObject(pb);
 	scene.pushObject(pc);
 	scene.pushObject(pd);
+	scene.pushObject(ca);
+
+
+
+
+	glutInit(&argc, argv);
 	scene.init();
 
     glutIgnoreKeyRepeat(1);

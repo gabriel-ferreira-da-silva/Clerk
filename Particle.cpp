@@ -65,3 +65,12 @@ void Particle::update(){
     this->calc_velocity();
     this->calc_position();
 }
+
+ void Current::draw()const {
+    glPushMatrix();
+    glBegin( GL_LINES);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(10.0f, 10.0f, 10.0f);
+    glEnd();
+    glPopMatrix();
+ }
