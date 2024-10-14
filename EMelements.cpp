@@ -61,7 +61,7 @@ void Particle::interact(const std::shared_ptr<Object>& obj)  {
                                             this->position.z - current->points[i].z );
             float dis = glm::length(distance);
             float delta= glm::length(wire);
-            glm::vec3 magnetic_field = (magnetostatic_constant*current->magnitude*delta/ (dis*dis)) * (cross(distance,wire)) ;
+            glm::vec3 magnetic_field = ((magnetostatic_constant*delta*current->magnitude) / (dis*dis)) * (cross(distance,wire)) ;
             glm::vec3 magnetic_force = this->electric_charge * cross(magnetic_field,this->velocity);
             this->resultant_force += magnetic_force;
         }
@@ -105,7 +105,7 @@ void Particle::update(){
 
 
 Current::Current(){
-    magnitude = 0.001f;
+    magnitude = 1.f;
 }
  void Current::update(){
     
