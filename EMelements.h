@@ -27,6 +27,7 @@ class Particle : public Object{
 class Current : public Object{
     public:
         float magnitude;
+        float magnetostatic_constant;
         std::vector<glm::vec3> points;
         
         Current();
