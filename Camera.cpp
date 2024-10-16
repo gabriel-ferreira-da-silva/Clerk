@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <math.h>
+#include <iostream>
 
 #define PI 3.141593
 

@@ -51,10 +51,11 @@ void Scene::changeSize(int w, int h) {
 
 
 	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
 	glViewport(0, 0, w, h);
 	gluPerspective(45.0f, ratio, 0.1f, 100.0f);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
 }
 
@@ -67,8 +68,8 @@ void Scene::renderScene(void) {
 	
 	objectsInteration();
 	objectsUpdate();
-
 	renderObjects();
+
 	glutSwapBuffers();
 }
 

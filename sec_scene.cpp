@@ -5,23 +5,23 @@
 #include "Object.h"
 #include "EMelements.h"
 #include "KeyboardHandler.h"
+#include "FpsGun.h"
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
 
-
-Camera cam;
-
 Scene scene;
 
 Particle *pa = new Particle();
 Current *ca = new Current();
+FpsGun *gun = new FpsGun();
 
 int main(int argc, char **argv) {
-	
 
+
+	gun->setCamera(&(scene.cam));
 	pa->position = glm::vec3(0.f,1.f, 0.f);
 
 	pa->velocity = glm::vec3(0.f,0.01f,.0f);	
@@ -41,6 +41,7 @@ int main(int argc, char **argv) {
 
 	scene.pushObject(pa);
 	scene.pushObject(ca);
+	scene.pushObject(gun);
 
 	glutInit(&argc, argv);
 	scene.init();
