@@ -2,7 +2,7 @@
 #include "Camera.h"
 #include <glm/glm.hpp>
 #include <GL/glut.h>
-
+#include <algorithm>
 
 void KeyboardHandler::setCamera(Camera *camera){
     cam = camera;
@@ -23,6 +23,7 @@ void KeyboardHandler::pressKeyNormal(unsigned char key, int xx, int yy) {
 		case 's': cam->deltaMoveX = -1.5f; break;
 		case 'a': cam->deltaMoveY = -1.5f; break;
 		case 'd': cam->deltaMoveY = 1.5f; break;
+		case 'f': this->keys.push_back('f');
 	}
 }
 
@@ -32,6 +33,7 @@ void KeyboardHandler::releaseKeyNormal(unsigned char key, int x, int y) {
 		case 's' : 
 		case 'a' : 
 		case 'd' : cam->deltaMoveX = 0.f; cam->deltaMoveY = 0.f;break;
+		case 'f': this->keys.erase(std::remove(this->keys.begin(), this->keys.end(), 'f'), this->keys.end());
 	}
 }
 

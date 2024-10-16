@@ -39,6 +39,8 @@ int main(int argc, char **argv) {
 	ca->points.push_back(glm::vec3( 0.f, 0.f, 20.f));
 	ca->points.push_back(glm::vec3( 0.f, 0.f, 22.f));
 
+
+	gun->keyboardHandler = &(scene.keyboardHandler);
 	scene.pushObject(pa);
 	scene.pushObject(ca);
 	scene.pushObject(gun);

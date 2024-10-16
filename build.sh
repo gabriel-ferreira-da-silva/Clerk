@@ -7,6 +7,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 SCENE="$1"
-g++ Camera.cpp KeyboardHandler.cpp Scene.cpp Object.cpp EMelements.cpp FpsGun.cpp "$SCENE".cpp -o "$SCENE"  -lGL -lGLU -lglut
 
-./"$SCENE"
+g++ -Iutils -Iobject -Iscenes utils/Camera.cpp utils/KeyboardHandler.cpp utils/Scene.cpp object/Object.cpp object/EMelements.cpp object/Bullet.cpp object/FpsGun.cpp scenes/"$SCENE".cpp -o scenes/"$SCENE" -lGL -lGLU -lglut
+
+./scenes/"$SCENE"

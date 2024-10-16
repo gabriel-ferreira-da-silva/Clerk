@@ -1,7 +1,7 @@
 #ifndef KEYBOARDHANDLER_H
 #define KEYBOARDHANDLER_H
 #include "Camera.h"
-
+#include <vector>
 
 class KeyboardHandler {
 public:
@@ -10,6 +10,8 @@ public:
         static KeyboardHandler instance;
         return instance;
     }
+
+    std::vector<char> keys;
 
     void setCamera(Camera* camera);
     void pressKey(int key, int xx, int yy);
